@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    body {
+        background: #f0f7ff;
+    }
+
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2;
+    }
+}
+
+.toast-item {
+    opacity: 0;
+    transform: translate3d(24px, -8px, 0) scale(0.97);
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.toast-item.toast-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+}
+
+.toast-item.toast-leaving {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0) scale(0.97);
+}
+
+.toast-progress-running {
+    animation-name: toast-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.submit-spinner {
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 9999px;
+    animation: spin 650ms linear infinite;
+}
+
+@keyframes toast-progress {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast-item,
+    .toast-progress-running,
+    .submit-spinner {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
